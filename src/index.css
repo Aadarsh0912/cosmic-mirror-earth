@@ -2,41 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Cosmic Space Weather Design System - NASA Hackathon Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Deep Space Background */
+    --background: 225 39% 7%;
+    --foreground: 210 100% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Cosmic Cards & Surfaces */
+    --card: 225 27% 12%;
+    --card-foreground: 210 100% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Interactive Elements */
+    --popover: 225 27% 15%;
+    --popover-foreground: 210 100% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Aurora Primary Colors */
+    --primary: 195 100% 70%;
+    --primary-foreground: 225 39% 7%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Nebula Secondary */
+    --secondary: 225 27% 18%;
+    --secondary-foreground: 210 100% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Cosmic Dust Muted */
+    --muted: 225 27% 15%;
+    --muted-foreground: 217 32% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Solar Flare Accent */
+    --accent: 290 100% 70%;
+    --accent-foreground: 225 39% 7%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Warning/Alert Colors */
+    --destructive: 0 100% 67%;
+    --destructive-foreground: 210 100% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Cosmic Borders */
+    --border: 225 27% 20%;
+    --input: 225 27% 20%;
+    --ring: 195 100% 70%;
 
-    --radius: 0.5rem;
+    /* Custom Space Theme Variables */
+    --aurora-green: 120 100% 75%;
+    --aurora-blue: 195 100% 70%;
+    --aurora-purple: 290 100% 70%;
+    --solar-orange: 25 100% 65%;
+    --cosmic-purple: 260 100% 65%;
+    --space-navy: 225 39% 7%;
+    --nebula-pink: 320 100% 75%;
+    
+    /* Gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(225, 39%, 7%), hsl(260, 100%, 15%));
+    --gradient-aurora: linear-gradient(90deg, hsl(120, 100%, 75%), hsl(195, 100%, 70%), hsl(290, 100%, 70%));
+    --gradient-solar: linear-gradient(45deg, hsl(25, 100%, 65%), hsl(0, 100%, 67%));
+    --gradient-nebula: linear-gradient(180deg, hsl(320, 100%, 75%), hsl(260, 100%, 65%));
+    
+    /* Shadows & Glows */
+    --shadow-cosmic: 0 25px 50px -12px hsl(225, 39%, 3%);
+    --glow-aurora: 0 0 30px hsl(195, 100%, 70%, 0.5);
+    --glow-solar: 0 0 25px hsl(25, 100%, 65%, 0.6);
+    --glow-purple: 0 0 20px hsl(290, 100%, 70%, 0.4);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +129,110 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 20% 50%, hsl(290, 100%, 70%, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(195, 100%, 70%, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, hsl(120, 100%, 75%, 0.05) 0%, transparent 50%);
+  }
+}
+
+@layer components {
+  /* Space-themed utility classes */
+  .cosmic-gradient {
+    background: var(--gradient-cosmic);
+  }
+  
+  .aurora-gradient {
+    background: var(--gradient-aurora);
+  }
+  
+  .solar-gradient {
+    background: var(--gradient-solar);
+  }
+  
+  .nebula-gradient {
+    background: var(--gradient-nebula);
+  }
+  
+  .aurora-glow {
+    box-shadow: var(--glow-aurora);
+  }
+  
+  .solar-glow {
+    box-shadow: var(--glow-solar);
+  }
+  
+  .purple-glow {
+    box-shadow: var(--glow-purple);
+  }
+  
+  .cosmic-shadow {
+    box-shadow: var(--shadow-cosmic);
+  }
+
+  /* Interactive storm effects */
+  .storm-shake {
+    animation: storm-shake 0.5s ease-in-out infinite;
+  }
+  
+  .gps-drift {
+    animation: gps-drift 3s ease-in-out infinite;
+  }
+  
+  .power-flicker {
+    animation: power-flicker 0.3s ease-in-out infinite alternate;
+  }
+  
+  .cosmic-wave {
+    animation: cosmic-wave 4s ease-in-out infinite;
+  }
+  
+  .star-twinkle {
+    animation: star-twinkle 2s ease-in-out infinite alternate;
+  }
+  
+  .aurora-pulse {
+    animation: aurora-pulse 3s ease-in-out infinite;
+  }
+}
+
+@layer base {
+  @keyframes storm-shake {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-2px) translateY(-1px); }
+    50% { transform: translateX(2px) translateY(1px); }
+    75% { transform: translateX(-1px) translateY(2px); }
+  }
+  
+  @keyframes gps-drift {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    33% { transform: translateX(5px) translateY(-3px) rotate(2deg); }
+    66% { transform: translateX(-3px) translateY(4px) rotate(-1deg); }
+  }
+  
+  @keyframes power-flicker {
+    0% { opacity: 1; filter: brightness(1); }
+    100% { opacity: 0.3; filter: brightness(0.3); }
+  }
+  
+  @keyframes cosmic-wave {
+    0% { transform: translateX(-100%) scaleY(1); opacity: 0; }
+    50% { opacity: 0.8; transform: translateX(50%) scaleY(1.2); }
+    100% { transform: translateX(200%) scaleY(1); opacity: 0; }
+  }
+  
+  @keyframes star-twinkle {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+  }
+  
+  @keyframes aurora-pulse {
+    0%, 100% { opacity: 0.6; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
   }
 }
