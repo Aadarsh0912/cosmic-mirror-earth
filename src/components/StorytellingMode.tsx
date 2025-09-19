@@ -20,44 +20,43 @@ export const StorytellingMode = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const [wavePosition, setWavePosition] = useState(0);
-  const [particleIntensity, setParticleIntensity] = useState(0);
 
   const storySteps: StoryStep[] = [
     {
       id: 1,
-      title: "Solar Eruption",
-      description: "A massive solar flare unleashes billions of charged particles at incredible speeds.",
+      title: "Solar Flare",
+      description: "High-energy particles burst from the Sun's surface",
       location: 'sun',
       icon: Sun,
-      duration: 2500,
-      effects: ["Magnetic field snaps", "X-ray spike", "Plasma ejection"]
+      duration: 3000,
+      effects: ["X-ray burst", "Plasma ejection"]
     },
     {
       id: 2,
-      title: "Cosmic Wave",
-      description: "Particles race through space at 2 million mph, creating a shockwave toward Earth.",
+      title: "Space Journey", 
+      description: "Solar wind travels through space at 2 million mph",
       location: 'space',
       icon: ArrowRight,
       duration: 3000,
-      effects: ["Solar wind surge", "Shockwave forms", "Magnetic compression"]
+      effects: ["Particle acceleration", "Magnetic field distortion"]
     },
     {
       id: 3,
-      title: "Magnetosphere Impact",
-      description: "Earth's magnetic shield deflects the storm, creating spectacular auroras.",
+      title: "Earth Impact",
+      description: "Magnetosphere deflects particles, creating auroras",
       location: 'earth',
       icon: Earth,
-      duration: 2500,
-      effects: ["Aurora formation", "Magnetic disturbance", "Radiation belt activation"]
+      duration: 3000,
+      effects: ["Aurora lights", "Magnetic disturbance"]
     },
     {
       id: 4,
-      title: "Your World",
-      description: "Technology around you reacts - GPS drifts, power fluctuates, communications disrupt.",
+      title: "Daily Life",
+      description: "Technology responds to the cosmic disturbance",
       location: 'you',
       icon: Zap,
       duration: 3000,
-      effects: ["GPS drift", "Power instability", "Radio interference", "Satellite disruption"]
+      effects: ["GPS drift", "Power fluctuations"]
     }
   ];
 
@@ -71,7 +70,6 @@ export const StorytellingMode = () => {
       interval = setInterval(() => {
         setProgress(prev => {
           const newProgress = prev + increment;
-          setParticleIntensity(Math.sin((newProgress / 100) * Math.PI) * 100);
           
           if (newProgress >= 100) {
             if (currentStep < storySteps.length - 1) {
@@ -80,7 +78,6 @@ export const StorytellingMode = () => {
               return 0;
             } else {
               setIsPlaying(false);
-              setParticleIntensity(0);
               return 100;
             }
           }
@@ -92,7 +89,7 @@ export const StorytellingMode = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isPlaying, currentStep]);
+  }, [isPlaying, currentStep, storySteps.length]);
 
   const playStory = () => {
     if (currentStep >= storySteps.length - 1 && progress >= 100) {
@@ -110,7 +107,6 @@ export const StorytellingMode = () => {
     setCurrentStep(0);
     setProgress(0);
     setWavePosition(0);
-    setParticleIntensity(0);
   };
 
   const step = storySteps[currentStep];
@@ -246,83 +242,61 @@ export const StorytellingMode = () => {
 
       {/* Cosmic Wave Visualization */}
       {isPlaying && (
-        <Card className="p-6 cosmic-shadow border-solar-orange/20 bg-card/30 backdrop-blur-sm overflow-hidden">
+        <Card className="p-6 cosmic-shadow border-primary/20 bg-card/30 backdrop-blur-sm overflow-hidden">
           <div className="text-center mb-4">
-            <h3 className="text-lg font-semibold text-foreground mb-2">Cosmic Wave Visualization</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">Solar Storm Visualization</h3>
             <p className="text-sm text-muted-foreground">
-              Solar particles racing through space at {(1 + currentStep * 0.5).toFixed(1)} million mph
+              Energy wave speed: {(1.5 + currentStep * 0.3).toFixed(1)} million mph
             </p>
           </div>
           
-          <div className="relative h-20 overflow-hidden rounded-lg bg-gradient-to-r from-space-navy/80 via-space-navy/50 to-space-navy/80 border border-aurora-blue/20">
-            {/* Multiple wave layers for depth */}
-            {[...Array(3)].map((_, layerIndex) => (
-              <div key={layerIndex} className="absolute inset-y-0 w-full">
-                <div 
-                  className={cn(
-                    "cosmic-wave h-full opacity-80",
-                    layerIndex === 0 && "bg-gradient-to-r from-transparent via-solar-orange/80 to-transparent",
-                    layerIndex === 1 && "bg-gradient-to-r from-transparent via-aurora-blue/60 to-transparent",
-                    layerIndex === 2 && "bg-gradient-to-r from-transparent via-nebula-pink/40 to-transparent"
-                  )}
-                  style={{ 
-                    animationDuration: `${step.duration - layerIndex * 200}ms`,
-                    animationDelay: `${layerIndex * 100}ms`,
-                    animationIterationCount: 'infinite',
-                    filter: `blur(${layerIndex}px)`,
-                    transform: `scale(${1 - layerIndex * 0.1})`
-                  }}
-                ></div>
-              </div>
-            ))}
-            
-            {/* Enhanced particle effects */}
+          {/* Simplified cosmic space */}
+          <div className="relative h-24 overflow-hidden rounded-lg bg-gradient-to-r from-space-navy/90 via-space-navy/70 to-space-navy/90 border border-primary/20">
+            {/* Solar wave animation */}
             <div className="absolute inset-0">
-              {[...Array(40)].map((_, i) => (
+              <div className="cosmic-wave h-full bg-gradient-to-r from-transparent via-solar-orange/80 to-transparent animate-pulse"></div>
+            </div>
+            
+            {/* Floating particles */}
+            <div className="absolute inset-0">
+              {[...Array(20)].map((_, i) => (
                 <div
                   key={i}
                   className={cn(
-                    "absolute rounded-full animate-pulse",
-                    i % 4 === 0 && "w-1 h-1 bg-solar-orange",
-                    i % 4 === 1 && "w-0.5 h-0.5 bg-aurora-blue", 
-                    i % 4 === 2 && "w-1.5 h-1.5 bg-nebula-pink opacity-60",
-                    i % 4 === 3 && "w-0.5 h-0.5 bg-white opacity-80"
+                    "absolute rounded-full animate-bounce",
+                    i % 3 === 0 && "w-1 h-1 bg-solar-orange/80",
+                    i % 3 === 1 && "w-0.5 h-0.5 bg-aurora-blue/70", 
+                    i % 3 === 2 && "w-1.5 h-1.5 bg-white/60"
                   )}
                   style={{
-                    left: `${(i * 2.5) % 100}%`,
-                    top: `${10 + (i * 3) % 70}%`,
-                    animationDelay: `${i * 0.05}s`,
-                    animationDuration: `${0.5 + (i % 3) * 0.5}s`,
-                    transform: `scale(${0.5 + (particleIntensity / 200)})`,
-                    opacity: Math.max(0.3, particleIntensity / 100),
-                    boxShadow: i % 4 === 0 ? `0 0 6px hsl(var(--solar-orange) / 0.8)` : 
-                              i % 4 === 1 ? `0 0 4px hsl(var(--aurora-blue) / 0.6)` :
-                              i % 4 === 2 ? `0 0 8px hsl(var(--nebula-pink) / 0.4)` :
-                              `0 0 3px rgba(255,255,255,0.8)`
+                    left: `${(i * 5) % 100}%`,
+                    top: `${20 + (i * 4) % 60}%`,
+                    animationDelay: `${i * 0.1}s`,
+                    animationDuration: `${1 + (i % 2)}s`
                   }}
                 />
               ))}
             </div>
             
-            {/* Energy field effect */}
-            <div 
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-aurora-blue/10 to-transparent animate-pulse"
-              style={{
-                opacity: particleIntensity / 300,
-                filter: 'blur(1px)'
-              }}
-            ></div>
+            {/* Realistic celestial bodies */}
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-br from-solar-orange via-yellow-400 to-red-500 rounded-full animate-spin shadow-lg shadow-solar-orange/50" style={{ animationDuration: '4s' }}>
+              <div className="absolute inset-1 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full animate-pulse"></div>
+            </div>
+            
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-gradient-to-br from-blue-400 via-green-400 to-blue-600 rounded-full shadow-lg shadow-blue-400/50">
+              <div className="absolute inset-0.5 bg-gradient-to-br from-green-300 to-blue-500 rounded-full"></div>
+            </div>
           </div>
           
-          {/* Real-time effects display */}
-          <div className="mt-4 flex justify-center gap-4 text-xs">
-            <div className="flex items-center gap-1">
+          {/* Status indicators */}
+          <div className="mt-4 flex justify-center gap-6 text-xs">
+            <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-solar-orange rounded-full animate-pulse"></div>
-              <span className="text-muted-foreground">Solar Wind: {Math.round(400 + particleIntensity * 2)} km/s</span>
+              <span className="text-muted-foreground">Solar Wind: {Math.round(400 + progress * 3)} km/s</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-aurora-blue rounded-full animate-pulse"></div>
-              <span className="text-muted-foreground">Magnetic Field: {Math.round(5 + particleIntensity / 10)} nT</span>
+              <span className="text-muted-foreground">Magnetic Field: {Math.round(5 + progress / 10)} nT</span>
             </div>
           </div>
         </Card>
