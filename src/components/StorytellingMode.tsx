@@ -24,39 +24,39 @@ export const StorytellingMode = () => {
   const storySteps: StoryStep[] = [
     {
       id: 1,
-      title: "Solar Flare",
-      description: "High-energy particles burst from the Sun's surface",
+      title: "🌞 Sun Goes BOOM!",
+      description: "The Sun shoots super-fast sparkly particles into space!",
       location: 'sun',
       icon: Sun,
       duration: 3000,
-      effects: ["X-ray burst", "Plasma ejection"]
+      effects: ["✨ Bright flash", "🌊 Space waves"]
     },
     {
       id: 2,
-      title: "Space Journey", 
-      description: "Solar wind travels through space at 2 million mph",
+      title: "🚀 Racing Through Space", 
+      description: "Space particles zoom toward Earth faster than rockets!",
       location: 'space',
       icon: ArrowRight,
       duration: 3000,
-      effects: ["Particle acceleration", "Magnetic field distortion"]
+      effects: ["💨 Super speed", "🌌 Space magic"]
     },
     {
       id: 3,
-      title: "Earth Impact",
-      description: "Magnetosphere deflects particles, creating auroras",
+      title: "🌍 Earth Says Hello",
+      description: "Earth's invisible shield creates beautiful dancing lights!",
       location: 'earth',
       icon: Earth,
       duration: 3000,
-      effects: ["Aurora lights", "Magnetic disturbance"]
+      effects: ["🌈 Pretty auroras", "🧲 Magnetic hugs"]
     },
     {
       id: 4,
-      title: "Daily Life",
-      description: "Technology responds to the cosmic disturbance",
+      title: "🏠 Your World Changes",
+      description: "Space weather affects phones, lights, and planes around you!",
       location: 'you',
       icon: Zap,
       duration: 3000,
-      effects: ["GPS drift", "Power fluctuations"]
+      effects: ["📱 Phone wobbles", "💡 Lights blink"]
     }
   ];
 
@@ -116,11 +116,11 @@ export const StorytellingMode = () => {
     <div className="p-6">
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold mb-4 text-foreground">
-          Cosmic Journey: From Sun to You
+          🌟 Amazing Space Adventure: From Sun to You!
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Experience the incredible journey of a solar storm as it travels from the Sun to Earth, 
-          affecting your daily life through this interactive storytelling experience.
+          Come on an exciting journey! Watch how a space storm travels from the Sun all the way to Earth, 
+          and see how it affects things in your everyday life. It's like magic, but it's real science!
         </p>
       </div>
 
@@ -244,9 +244,9 @@ export const StorytellingMode = () => {
       {isPlaying && (
         <Card className="p-6 cosmic-shadow border-primary/20 bg-card/30 backdrop-blur-sm overflow-hidden">
           <div className="text-center mb-4">
-            <h3 className="text-lg font-semibold text-foreground mb-2">Solar Storm Visualization</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">🌊 Space Wave Detector</h3>
             <p className="text-sm text-muted-foreground">
-              Energy wave speed: {(1.5 + currentStep * 0.3).toFixed(1)} million mph
+              Wave speed: {(1.5 + currentStep * 0.3).toFixed(1)} million mph (That's SUPER fast! 🚀)
             </p>
           </div>
           
@@ -305,22 +305,22 @@ export const StorytellingMode = () => {
       {/* Educational Information */}
       <div className="mt-8 grid md:grid-cols-2 gap-6">
         <Card className="p-6 cosmic-shadow border-aurora-purple/20 bg-card/30 backdrop-blur-sm">
-          <h3 className="text-lg font-semibold mb-3 text-foreground">Did You Know?</h3>
+          <h3 className="text-lg font-semibold mb-3 text-foreground">🤩 Cool Space Facts!</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• Solar storms can travel at speeds of 1-3 million mph</li>
-            <li>• The fastest recorded solar storm reached Earth in just 17 hours</li>
-            <li>• Geomagnetic storms can cause auroras visible as far south as Florida</li>
-            <li>• A major solar storm could cause trillions in economic damage</li>
+            <li>🏃‍♂️ Space storms are faster than the fastest race car!</li>
+            <li>⚡ Some space storms reach Earth in less than one day!</li>
+            <li>🌈 Space storms create beautiful colored lights in the sky!</li>
+            <li>🌍 Space weather affects the whole planet at once!</li>
           </ul>
         </Card>
 
         <Card className="p-6 cosmic-shadow border-nebula-pink/20 bg-card/30 backdrop-blur-sm">
-          <h3 className="text-lg font-semibold mb-3 text-foreground">Real-World Impact</h3>
+          <h3 className="text-lg font-semibold mb-3 text-foreground">🌟 Real Examples</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• 1989 Quebec blackout affected 6 million people for 9 hours</li>
-            <li>• Airlines reroute polar flights during severe space weather</li>
-            <li>• GPS accuracy can degrade by several meters during storms</li>
-            <li>• Astronauts take shelter during major radiation events</li>
+            <li>🏠 In 1989, space weather turned off lights for 9 hours!</li>
+            <li>✈️ Airplanes sometimes change routes to avoid space storms!</li>
+            <li>📍 GPS can get confused by a few meters during storms!</li>
+            <li>👨‍🚀 Astronauts hide in special rooms during big space storms!</li>
           </ul>
         </Card>
       </div>

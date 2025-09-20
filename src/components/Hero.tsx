@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowDown, Camera, Play } from "lucide-react";
+import { SolarSystem } from "@/components/SolarSystem";
 import cosmicHeroBg from "@/assets/cosmic-hero-bg.jpg";
 
 export const Hero = () => {
@@ -22,23 +23,28 @@ export const Hero = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="aurora-gradient bg-clip-text text-transparent">
-              Cosmic Mirror
+              Space Weather Explorer
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Experience how solar storms affect your daily life through immersive AR. 
-            Turn everyday objects into cosmic mirrors showing real NASA space weather data.
+            Discover how space storms from the Sun affect things around you! 
+            Use your phone to see how cosmic weather changes your world every day.
           </p>
+          
+          {/* Solar System Animation */}
+          <div className="mb-8">
+            <SolarSystem />
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button size="lg" className="aurora-glow text-lg px-8 py-6">
               <Camera className="w-5 h-5 mr-2" />
-              Start AR Experience
+              🚀 Start Space Adventure
             </Button>
             <Button variant="outline" size="lg" className="border-aurora-blue/50 hover:bg-aurora-blue/10 text-lg px-8 py-6">
               <Play className="w-5 h-5 mr-2" />
-              Watch Demo
+              🎬 Watch Cool Demo
             </Button>
           </div>
 
@@ -49,8 +55,8 @@ export const Hero = () => {
                 <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-aurora-blue/20 flex items-center justify-center">
                   📱
                 </div>
-                <h3 className="font-semibold mb-2 text-foreground">GPS Drift</h3>
-                <p className="text-sm text-muted-foreground">See navigation errors in real-time</p>
+                <h3 className="font-semibold mb-2 text-foreground">📱 Phone Gets Confused</h3>
+                <p className="text-sm text-muted-foreground">Watch your GPS wobble during space storms!</p>
               </div>
             </Card>
 
@@ -59,8 +65,8 @@ export const Hero = () => {
                 <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-solar-orange/20 flex items-center justify-center">
                   💡
                 </div>
-                <h3 className="font-semibold mb-2 text-foreground">Power Flickers</h3>
-                <p className="text-sm text-muted-foreground">Watch lights react to solar storms</p>
+                <h3 className="font-semibold mb-2 text-foreground">💡 Lights Go Blink</h3>
+                <p className="text-sm text-muted-foreground">See how space weather makes lights flicker!</p>
               </div>
             </Card>
 
@@ -69,8 +75,8 @@ export const Hero = () => {
                 <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-aurora-purple/20 flex items-center justify-center">
                   ✈️
                 </div>
-                <h3 className="font-semibold mb-2 text-foreground">Flight Disruption</h3>
-                <p className="text-sm text-muted-foreground">Aircraft systems get affected</p>
+                <h3 className="font-semibold mb-2 text-foreground">✈️ Planes Get Shaky</h3>
+                <p className="text-sm text-muted-foreground">Airplanes feel space weather too!</p>
               </div>
             </Card>
           </div>

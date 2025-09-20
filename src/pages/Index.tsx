@@ -118,7 +118,7 @@ const Index = () => {
         {/* Features Overview */}
         <section className="container mx-auto px-4 py-16">
           <h2 className="text-3xl font-bold text-center mb-12 aurora-gradient bg-clip-text text-transparent">
-            How Cosmic Storms Affect Your World
+            🌟 How Space Weather Affects Your Daily Life
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -127,9 +127,9 @@ const Index = () => {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-aurora-blue/20 flex items-center justify-center">
                   <Globe className="w-8 h-8 text-aurora-blue" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-foreground">GPS Disruption</h3>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">📍 GPS Gets Lost</h3>
                 <p className="text-muted-foreground">
-                  Watch your navigation drift as solar particles interfere with satellite signals
+                  See how space particles make your phone's map wiggle and move around!
                 </p>
               </div>
             </Card>
@@ -139,9 +139,9 @@ const Index = () => {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-solar-orange/20 flex items-center justify-center">
                   <Zap className="w-8 h-8 text-solar-orange" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-foreground">Power Grid Surges</h3>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">⚡ Power Goes Wobbly</h3>
                 <p className="text-muted-foreground">
-                  Experience how lights flicker when solar storms create electrical disturbances
+                  Discover why lights blink and electronics act funny during space storms!
                 </p>
               </div>
             </Card>
@@ -151,9 +151,9 @@ const Index = () => {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-aurora-purple/20 flex items-center justify-center">
                   <Rocket className="w-8 h-8 text-aurora-purple" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-foreground">Flight Disruptions</h3>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">🛩️ Airplanes Feel It Too</h3>
                 <p className="text-muted-foreground">
-                  See aircraft icons shake as radiation affects aviation systems
+                  Watch how space weather makes flying a bumpy adventure!
                 </p>
               </div>
             </Card>
@@ -163,7 +163,7 @@ const Index = () => {
         {/* NASA Data Attribution */}
         <section className="container mx-auto px-4 py-8 text-center">
           <p className="text-muted-foreground">
-            Powered by real-time NASA Space Weather data and NOAA Space Weather Prediction Center
+            🚀 Powered by real NASA space weather data - the same info scientists use to study space!
           </p>
         </section>
       </main>
