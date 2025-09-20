@@ -5,13 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { ArCamera } from "@/components/ArCamera";
 import { InteractiveObjects } from "@/components/InteractiveObjects";
 import { SpaceWeatherDashboard } from "@/components/SpaceWeatherDashboard";
-import { StorytellingMode } from "@/components/StorytellingMode";
+import { ChildrenStories } from "@/components/ChildrenStories";
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
-import { Camera, Zap, Globe, Rocket, Play } from "lucide-react";
+import { Camera, Zap, Globe, Rocket, BookOpen } from "lucide-react";
 
 const Index = () => {
-  const [activeMode, setActiveMode] = useState<'explore' | 'ar' | 'story' | 'data'>('explore');
+  const [activeMode, setActiveMode] = useState<'explore' | 'ar' | 'stories' | 'data'>('explore');
   const [isStormActive, setIsStormActive] = useState(false);
 
   // Simulate space weather updates
@@ -28,8 +28,8 @@ const Index = () => {
     switch (activeMode) {
       case 'ar':
         return <ArCamera />;
-      case 'story':
-        return <StorytellingMode />;
+      case 'stories':
+        return <ChildrenStories />;
       case 'data':
         return <SpaceWeatherDashboard />;
       default:
@@ -80,12 +80,12 @@ const Index = () => {
               AR Experience
             </Button>
             <Button
-              variant={activeMode === 'story' ? 'default' : 'secondary'}
-              onClick={() => setActiveMode('story')}
+              variant={activeMode === 'stories' ? 'default' : 'secondary'}
+              onClick={() => setActiveMode('stories')}
               className="solar-glow"
             >
-              <Play className="w-4 h-4 mr-2" />
-              Cosmic Journey
+              <BookOpen className="w-4 h-4 mr-2" />
+              📚 Space Stories
             </Button>
             <Button
               variant={activeMode === 'data' ? 'default' : 'secondary'}
