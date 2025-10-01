@@ -14,7 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          favorite_character: string | null
+          id: string
+          quiz_score: number | null
+          stories_completed: number | null
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          favorite_character?: string | null
+          id: string
+          quiz_score?: number | null
+          stories_completed?: number | null
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          favorite_character?: string | null
+          id?: string
+          quiz_score?: number | null
+          stories_completed?: number | null
+          updated_at?: string | null
+          username?: string | null
+        }
+        Relationships: []
+      }
+      quiz_results: {
+        Row: {
+          completed_at: string | null
+          id: string
+          max_score: number
+          quiz_name: string
+          score: number
+          user_id: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          id?: string
+          max_score: number
+          quiz_name: string
+          score: number
+          user_id?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          id?: string
+          max_score?: number
+          quiz_name?: string
+          score?: number
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      space_weather_cache: {
+        Row: {
+          data: Json
+          data_type: string
+          expires_at: string | null
+          fetched_at: string | null
+          id: string
+        }
+        Insert: {
+          data: Json
+          data_type: string
+          expires_at?: string | null
+          fetched_at?: string | null
+          id?: string
+        }
+        Update: {
+          data?: Json
+          data_type?: string
+          expires_at?: string | null
+          fetched_at?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      story_progress: {
+        Row: {
+          completed: boolean | null
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          story_id: string
+          user_id: string | null
+        }
+        Insert: {
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          story_id: string
+          user_id?: string | null
+        }
+        Update: {
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          story_id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

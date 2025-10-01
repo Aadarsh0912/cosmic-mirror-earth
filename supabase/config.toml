@@ -1,1 +1,66 @@
 project_id = "woddrckzmvnjgraypvzd"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[db.pooler]
+enabled = false
+port = 54329
+pool_mode = "transaction"
+default_pool_size = 20
+max_client_conn = 100
+
+[realtime]
+enabled = true
+port = 54323
+ip_version = "IPv4"
+
+[storage]
+enabled = true
+port = 54324
+file_size_limit = "50MiB"
+
+[auth]
+enabled = true
+port = 54325
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["https://localhost:3000"]
+
+[auth.external.google]
+enabled = false
+client_id = ""
+secret = ""
+redirect_uri = ""
+url = ""
+authorization_endpoint = ""
+token_endpoint = ""
+userinfo_endpoint = ""
+
+[functions.fetch-space-weather]
+verify_jwt = false
+
+[studio]
+enabled = true
+port = 54326
+api_url = "http://localhost"
+openai_api_key = ""
+
+[inbucket]
+enabled = true
+port = 54327
+
+[storage.image_transformation]
+enabled = true
+
+[analytics]
+enabled = false
+port = 54328
+backend = "postgres"
