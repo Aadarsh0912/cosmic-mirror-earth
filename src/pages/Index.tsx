@@ -56,12 +56,12 @@ const Index = () => {
 
       <Navigation />
       
-      {activeMode === 'explore' && <Hero />}
+      {activeMode === 'explore' && <Hero onModeChange={(mode) => setActiveMode(mode as 'explore' | 'ar' | 'stories' | 'data')} />}
       
       {/* Main Content Area */}
       <main className="relative z-10">
         {/* Mode Selection */}
-        <section className="container mx-auto px-4 py-8">
+        <section id="mode-selection" className="container mx-auto px-4 py-8">
           <div className="flex flex-wrap gap-4 justify-center mb-8">
             <Button
               variant={activeMode === 'explore' ? 'default' : 'secondary'}
