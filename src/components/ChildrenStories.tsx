@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, BookOpen, User, Plane, Rocket, Zap, Tractor } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, User, Plane, Rocket, Zap, Tractor, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Story {
@@ -19,6 +19,8 @@ interface Story {
 export const ChildrenStories = () => {
   const [currentStory, setCurrentStory] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; delay: number }>>([]);
 
   const stories: Story[] = [
     {
@@ -101,94 +103,168 @@ export const ChildrenStories = () => {
   const currentStoryData = stories[currentStory];
   const totalPages = currentStoryData.story.length;
 
+  useEffect(() => {
+    // Generate floating particles
+    const newParticles = Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 5
+    }));
+    setParticles(newParticles);
+  }, []);
+
   const nextStory = () => {
-    setCurrentStory((prev) => (prev + 1) % stories.length);
-    setCurrentPage(0);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentStory((prev) => (prev + 1) % stories.length);
+      setCurrentPage(0);
+      setIsTransitioning(false);
+    }, 500);
   };
 
   const prevStory = () => {
-    setCurrentStory((prev) => (prev - 1 + stories.length) % stories.length);
-    setCurrentPage(0);
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentStory((prev) => (prev - 1 + stories.length) % stories.length);
+      setCurrentPage(0);
+      setIsTransitioning(false);
+    }, 500);
   };
 
   const nextPage = () => {
     if (currentPage < totalPages - 1) {
-      setCurrentPage(prev => prev + 1);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentPage(prev => prev + 1);
+        setIsTransitioning(false);
+      }, 400);
     }
   };
 
   const prevPage = () => {
     if (currentPage > 0) {
-      setCurrentPage(prev => prev - 1);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentPage(prev => prev - 1);
+        setIsTransitioning(false);
+      }, 400);
     }
   };
 
   const Icon = currentStoryData.icon;
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-4 text-foreground">
-          📚 Stellar Stories: Space Weather Adventures
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+    <div className="p-6 max-w-4xl mx-auto relative">
+      {/* Floating Particles Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute w-1 h-1 bg-primary/30 rounded-full"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              animation: `particle-float ${8 + particle.delay}s ease-in-out infinite`,
+              animationDelay: `${particle.delay}s`
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="text-center mb-8 cinematic-fade relative">
+        <div className="inline-block relative mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-foreground hologram-effect">
+            📚 Stellar Stories: Space Weather Adventures
+          </h2>
+          <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 blur-xl -z-10 aurora-pulse" />
+        </div>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
           Meet amazing people and discover how space weather affects their daily lives! 
           Each story teaches you something cool about space and Earth.
         </p>
+        <Sparkles className="inline-block w-6 h-6 text-primary ml-2 star-twinkle" />
       </div>
 
       {/* Story Selection */}
-      <div className="flex flex-wrap gap-2 justify-center mb-6">
+      <div className="flex flex-wrap gap-2 justify-center mb-6 relative">
         {stories.map((story, index) => (
           <Button
             key={story.id}
             variant={index === currentStory ? "default" : "outline"}
             size="sm"
             onClick={() => {
-              setCurrentStory(index);
-              setCurrentPage(0);
+              setIsTransitioning(true);
+              setTimeout(() => {
+                setCurrentStory(index);
+                setCurrentPage(0);
+                setIsTransitioning(false);
+              }, 500);
             }}
             className={cn(
-              "text-xs",
-              index === currentStory && "aurora-glow"
+              "text-xs transition-all duration-300 hover:scale-110 hover:-translate-y-1",
+              index === currentStory && "aurora-glow scale-110 shadow-lg"
             )}
           >
-            <story.icon className="w-3 h-3 mr-1" />
+            <story.icon className={cn(
+              "w-3 h-3 mr-1 transition-transform",
+              index === currentStory && "animate-pulse"
+            )} />
             {story.character}
           </Button>
         ))}
       </div>
 
       {/* Main Story Card */}
-      <Card className={cn("p-8 mb-6 cosmic-shadow backdrop-blur-sm", currentStoryData.color)}>
+      <Card className={cn(
+        "p-8 mb-6 cosmic-shadow backdrop-blur-sm relative overflow-hidden transition-all duration-500",
+        currentStoryData.color,
+        isTransitioning ? "scale-95 opacity-50" : "scale-100 opacity-100"
+      )}>
+        {/* Animated Background Glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 aurora-pulse pointer-events-none" />
+        
         {/* Story Header */}
-        <div className="text-center mb-6">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-background/20 flex items-center justify-center">
-            <Icon className="w-8 h-8 text-foreground" />
+        <div className={cn(
+          "text-center mb-6 relative z-10 transition-all duration-700",
+          isTransitioning ? "movie-zoom" : "cinematic-fade"
+        )}>
+          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-background/30 backdrop-blur-sm flex items-center justify-center relative group">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 blur-xl group-hover:blur-2xl transition-all aurora-pulse" />
+            <Icon className="w-10 h-10 text-foreground relative z-10 transition-transform group-hover:scale-110 group-hover:rotate-12 duration-500" />
           </div>
-          <h3 className="text-2xl font-bold mb-2 text-foreground">{currentStoryData.title}</h3>
-          <Badge variant="secondary" className="mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold mb-3 text-foreground bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text">
+            {currentStoryData.title}
+          </h3>
+          <Badge variant="secondary" className="mb-4 text-sm px-4 py-1 shadow-lg">
             {currentStoryData.profession}
           </Badge>
         </div>
 
         {/* Story Content */}
-        <div className="bg-background/30 rounded-lg p-6 mb-6 min-h-[200px] flex items-center">
-          <div className="w-full">
-            <p className="text-lg text-foreground leading-relaxed text-center">
+        <div className={cn(
+          "bg-background/40 backdrop-blur-sm rounded-lg p-8 mb-6 min-h-[220px] flex items-center relative overflow-hidden",
+          "border border-primary/20 shadow-inner"
+        )}>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+          <div className={cn(
+            "w-full relative z-10 transition-all duration-500",
+            isTransitioning ? "opacity-0 scale-95 blur-sm" : "opacity-100 scale-100 blur-0 cinematic-fade"
+          )}>
+            <p className="text-lg md:text-xl text-foreground leading-relaxed text-center font-medium">
               {currentStoryData.story[currentPage]}
             </p>
           </div>
         </div>
 
         {/* Page Navigation */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 relative z-10">
           <Button
             variant="outline"
             size="sm"
             onClick={prevPage}
             disabled={currentPage === 0}
-            className="opacity-70 hover:opacity-100"
+            className="opacity-70 hover:opacity-100 transition-all hover:scale-110 hover:-translate-x-1 disabled:hover:scale-100 disabled:hover:translate-x-0"
           >
             <ChevronLeft className="w-4 h-4 mr-1" />
             Previous
@@ -199,9 +275,19 @@ export const ChildrenStories = () => {
               <div
                 key={i}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all",
-                  i === currentPage ? "bg-primary" : "bg-muted"
+                  "rounded-full transition-all duration-300",
+                  i === currentPage 
+                    ? "w-8 h-2 bg-primary shadow-lg shadow-primary/50" 
+                    : "w-2 h-2 bg-muted hover:bg-muted-foreground/50 cursor-pointer",
+                  i < currentPage && "bg-primary/50"
                 )}
+                onClick={() => {
+                  setIsTransitioning(true);
+                  setTimeout(() => {
+                    setCurrentPage(i);
+                    setIsTransitioning(false);
+                  }, 400);
+                }}
               />
             ))}
           </div>
@@ -211,7 +297,7 @@ export const ChildrenStories = () => {
             size="sm"
             onClick={nextPage}
             disabled={currentPage === totalPages - 1}
-            className="opacity-70 hover:opacity-100"
+            className="opacity-70 hover:opacity-100 transition-all hover:scale-110 hover:translate-x-1 disabled:hover:scale-100 disabled:hover:translate-x-0"
           >
             Next
             <ChevronRight className="w-4 h-4 ml-1" />
@@ -220,36 +306,59 @@ export const ChildrenStories = () => {
 
         {/* Fun Fact */}
         {currentPage === totalPages - 1 && (
-          <div className="bg-aurora-blue/10 border border-aurora-blue/30 rounded-lg p-4 text-center">
-            <h4 className="font-semibold text-aurora-blue mb-2">🤓 Cool Space Fact!</h4>
-            <p className="text-sm text-muted-foreground">{currentStoryData.funFact}</p>
+          <div className="bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 border border-primary/40 rounded-lg p-5 text-center relative overflow-hidden cinematic-fade shadow-lg">
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/5 to-transparent aurora-pulse pointer-events-none" />
+            <h4 className="font-bold text-primary mb-2 text-lg relative z-10 flex items-center justify-center gap-2">
+              <Sparkles className="w-5 h-5 star-twinkle" />
+              🤓 Cool Space Fact!
+              <Sparkles className="w-5 h-5 star-twinkle" />
+            </h4>
+            <p className="text-base text-foreground font-medium relative z-10">{currentStoryData.funFact}</p>
           </div>
         )}
       </Card>
 
       {/* Story Navigation */}
-      <div className="flex justify-center gap-4">
-        <Button onClick={prevStory} variant="outline" className="aurora-glow">
-          <ChevronLeft className="w-4 h-4 mr-2" />
+      <div className="flex justify-center gap-4 relative z-10">
+        <Button 
+          onClick={prevStory} 
+          variant="outline" 
+          className="aurora-glow transition-all hover:scale-110 hover:-translate-x-2 group"
+          disabled={isTransitioning}
+        >
+          <ChevronLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
           Previous Story
         </Button>
-        <Button onClick={nextStory} variant="outline" className="solar-glow">
+        <Button 
+          onClick={nextStory} 
+          variant="outline" 
+          className="solar-glow transition-all hover:scale-110 hover:translate-x-2 group"
+          disabled={isTransitioning}
+        >
           Next Story
-          <ChevronRight className="w-4 h-4 ml-2" />
+          <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
 
       {/* Educational Footer */}
-      <div className="mt-8 text-center">
-        <Card className="p-6 cosmic-shadow border-nebula-pink/20 bg-card/30 backdrop-blur-sm">
-          <h3 className="text-lg font-semibold mb-3 text-foreground">
-            🌟 About These Stories
-          </h3>
-          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            These stories are inspired by real space weather events! Space weather happens when the Sun sends 
-            energy and particles toward Earth, affecting technology and creating beautiful auroras. 
-            Scientists study space weather to help keep everyone safe and prepared.
-          </p>
+      <div className="mt-8 text-center relative z-10">
+        <Card className="p-8 cosmic-shadow border-primary/30 bg-card/40 backdrop-blur-md relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-16 translate-x-16 aurora-pulse" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/20 rounded-full blur-3xl translate-y-16 -translate-x-16 aurora-pulse" style={{ animationDelay: '1s' }} />
+          
+          <div className="relative z-10">
+            <h3 className="text-xl font-bold mb-4 text-foreground flex items-center justify-center gap-2">
+              <BookOpen className="w-6 h-6 text-primary star-twinkle" />
+              🌟 About These Stories
+              <BookOpen className="w-6 h-6 text-primary star-twinkle" />
+            </h3>
+            <p className="text-base text-foreground/90 max-w-2xl mx-auto leading-relaxed">
+              These stories are inspired by <span className="font-semibold text-primary">real space weather events</span>! 
+              Space weather happens when the Sun sends energy and particles toward Earth, affecting technology and creating beautiful auroras. 
+              Scientists study space weather to help keep everyone safe and prepared.
+            </p>
+          </div>
         </Card>
       </div>
     </div>
