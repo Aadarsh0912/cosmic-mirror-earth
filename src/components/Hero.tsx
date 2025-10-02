@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowDown, Camera, Play, Sparkles } from "lucide-react";
 import { SolarSystem } from "@/components/SolarSystem";
-import { DemoModal } from "@/components/DemoModal";
+import { CinematicDemoModal } from "@/components/CinematicDemoModal";
 import cosmicHeroBg from "@/assets/cosmic-hero-bg.jpg";
 import { useNavigate } from "react-router-dom";
 
@@ -132,7 +132,7 @@ export const Hero = ({ onModeChange }: { onModeChange?: (mode: string) => void }
     </section>
     
     {/* Demo Modal */}
-    <DemoModal 
+    <CinematicDemoModal 
       isOpen={isDemoOpen}
       onClose={() => setIsDemoOpen(false)}
       onComplete={handleDemoComplete}
