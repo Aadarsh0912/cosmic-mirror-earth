@@ -2,8 +2,18 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, BookOpen, User, Plane, Rocket, Zap, Tractor, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, User, Plane, Rocket, Zap, Tractor, Sparkles, Radio, Navigation, Shield, Cloud, Wifi, MapPin, Compass, Sun, Moon, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+interface StoryPage {
+  text: string;
+  visuals: {
+    icon: React.ComponentType<any>;
+    color: string;
+    animation: string;
+    particles?: string;
+  }[];
+}
 
 interface Story {
   id: number;
@@ -11,7 +21,7 @@ interface Story {
   character: string;
   profession: string;
   icon: React.ComponentType<any>;
-  story: string[];
+  story: StoryPage[];
   funFact: string;
   color: string;
 }
@@ -31,10 +41,37 @@ export const ChildrenStories = () => {
       icon: Tractor,
       color: "border-green-400/50 bg-green-400/10",
       story: [
-        "🌾 Farmer Sam was working in his cornfield when something amazing happened! The sky started dancing with beautiful green and purple lights.",
-        "📡 'Oh no!' said Sam. 'My GPS tractor is going in circles instead of straight lines!' The space storm was making his farming equipment confused.",
-        "🌱 But Sam was smart! He knew that space weather sometimes affects technology. So he used his old compass and planted his seeds the traditional way.",
-        "🌈 That night, Sam and his family watched the most beautiful aurora lights dancing in the sky. 'Space weather can be tricky, but it sure is beautiful!' Sam smiled."
+        {
+          text: "🌾 Farmer Sam was working in his cornfield when something amazing happened! The sky started dancing with beautiful green and purple lights.",
+          visuals: [
+            { icon: Tractor, color: "text-green-500", animation: "animate-bounce", particles: "aurora" },
+            { icon: Sun, color: "text-yellow-400", animation: "cosmic-spin", particles: "stars" },
+            { icon: Sparkles, color: "text-purple-400", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "📡 'Oh no!' said Sam. 'My GPS tractor is going in circles instead of straight lines!' The space storm was making his farming equipment confused.",
+          visuals: [
+            { icon: Navigation, color: "text-red-500", animation: "animate-spin", particles: "error" },
+            { icon: Radio, color: "text-orange-400", animation: "animate-pulse" },
+            { icon: Tractor, color: "text-green-500", animation: "movie-zoom" }
+          ]
+        },
+        {
+          text: "🌱 But Sam was smart! He knew that space weather sometimes affects technology. So he used his old compass and planted his seeds the traditional way.",
+          visuals: [
+            { icon: Compass, color: "text-blue-500", animation: "cosmic-spin", particles: "light" },
+            { icon: Sparkles, color: "text-green-400", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "🌈 That night, Sam and his family watched the most beautiful aurora lights dancing in the sky. 'Space weather can be tricky, but it sure is beautiful!' Sam smiled.",
+          visuals: [
+            { icon: Moon, color: "text-blue-300", animation: "aurora-pulse", particles: "aurora" },
+            { icon: Star, color: "text-yellow-300", animation: "star-twinkle" },
+            { icon: Sparkles, color: "text-purple-400", animation: "star-twinkle" }
+          ]
+        }
       ],
       funFact: "Farmers use GPS to plant crops in perfectly straight lines!"
     },
@@ -46,10 +83,38 @@ export const ChildrenStories = () => {
       icon: Plane,
       color: "border-blue-400/50 bg-blue-400/10",
       story: [
-        "✈️ Captain Maya was flying her airplane high above the clouds when mission control called: 'Maya, there's a space storm coming!'",
-        "📻 'What does that mean?' asked her co-pilot. Maya explained: 'Space storms can make our radio fuzzy and our navigation wobbly!'",
-        "🛣️ Maya was super smart and changed her flight path away from the North Pole, where space storms are strongest. 'Safety first!' she said with a smile.",
-        "🌟 Her passengers got to see amazing northern lights through the windows. 'Thanks to space weather, you're seeing nature's most beautiful light show!' Maya announced."
+        {
+          text: "✈️ Captain Maya was flying her airplane high above the clouds when mission control called: 'Maya, there's a space storm coming!'",
+          visuals: [
+            { icon: Plane, color: "text-blue-500", animation: "meteor-trail", particles: "clouds" },
+            { icon: Cloud, color: "text-gray-300", animation: "cinematic-fade" },
+            { icon: Radio, color: "text-red-400", animation: "animate-pulse" }
+          ]
+        },
+        {
+          text: "📻 'What does that mean?' asked her co-pilot. Maya explained: 'Space storms can make our radio fuzzy and our navigation wobbly!'",
+          visuals: [
+            { icon: Radio, color: "text-orange-500", animation: "lightning-flash", particles: "error" },
+            { icon: Wifi, color: "text-red-500", animation: "animate-ping" },
+            { icon: Navigation, color: "text-yellow-400", animation: "animate-bounce" }
+          ]
+        },
+        {
+          text: "🛣️ Maya was super smart and changed her flight path away from the North Pole, where space storms are strongest. 'Safety first!' she said with a smile.",
+          visuals: [
+            { icon: MapPin, color: "text-green-500", animation: "movie-zoom", particles: "light" },
+            { icon: Navigation, color: "text-blue-400", animation: "cosmic-spin" },
+            { icon: Plane, color: "text-blue-500", animation: "meteor-trail" }
+          ]
+        },
+        {
+          text: "🌟 Her passengers got to see amazing northern lights through the windows. 'Thanks to space weather, you're seeing nature's most beautiful light show!' Maya announced.",
+          visuals: [
+            { icon: Sparkles, color: "text-purple-400", animation: "star-twinkle", particles: "aurora" },
+            { icon: Star, color: "text-yellow-300", animation: "star-twinkle" },
+            { icon: Moon, color: "text-blue-300", animation: "aurora-pulse" }
+          ]
+        }
       ],
       funFact: "Pilots sometimes fly different routes to avoid space weather!"
     },
@@ -61,10 +126,37 @@ export const ChildrenStories = () => {
       icon: Rocket,
       color: "border-purple-400/50 bg-purple-400/10",
       story: [
-        "🚀 Astronaut Alex was floating in the International Space Station when the computer beeped: 'Space storm alert!'",
-        "🛡️ 'Time to go to our special safe room!' Alex told the crew. The space station has thick walls that protect astronauts from space radiation.",
-        "🌍 From their safe spot, Alex looked down at Earth and saw the most incredible auroras covering the whole planet like a glowing blanket.",
-        "⭐ 'Space storms remind us how connected Earth and space really are,' Alex said, taking amazing photos to share with kids back on Earth."
+        {
+          text: "🚀 Astronaut Alex was floating in the International Space Station when the computer beeped: 'Space storm alert!'",
+          visuals: [
+            { icon: Rocket, color: "text-purple-500", animation: "space-warp", particles: "stars" },
+            { icon: Radio, color: "text-red-500", animation: "lightning-flash" },
+            { icon: Sparkles, color: "text-yellow-400", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "🛡️ 'Time to go to our special safe room!' Alex told the crew. The space station has thick walls that protect astronauts from space radiation.",
+          visuals: [
+            { icon: Shield, color: "text-blue-500", animation: "hologram", particles: "light" },
+            { icon: Rocket, color: "text-purple-400", animation: "movie-zoom" }
+          ]
+        },
+        {
+          text: "🌍 From their safe spot, Alex looked down at Earth and saw the most incredible auroras covering the whole planet like a glowing blanket.",
+          visuals: [
+            { icon: Moon, color: "text-blue-400", animation: "cosmic-spin", particles: "aurora" },
+            { icon: Sparkles, color: "text-green-400", animation: "aurora-pulse" },
+            { icon: Star, color: "text-purple-300", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "⭐ 'Space storms remind us how connected Earth and space really are,' Alex said, taking amazing photos to share with kids back on Earth.",
+          visuals: [
+            { icon: Star, color: "text-yellow-400", animation: "star-twinkle", particles: "stars" },
+            { icon: Sparkles, color: "text-purple-400", animation: "star-twinkle" },
+            { icon: Sun, color: "text-orange-400", animation: "aurora-pulse" }
+          ]
+        }
       ],
       funFact: "Astronauts have a special safe room in the space station!"
     },
@@ -76,10 +168,38 @@ export const ChildrenStories = () => {
       icon: Zap,
       color: "border-yellow-400/50 bg-yellow-400/10",
       story: [
-        "⚡ Engineer Emma worked at the power plant that brings electricity to thousands of homes. One night, her computers started beeping loudly!",
-        "'Space weather is causing extra electricity in our power lines!' Emma explained to her team. 'We need to be extra careful tonight.'",
-        "🔧 Emma and her team worked like superheroes, adjusting the power systems to keep everyone's lights on during the space storm.",
-        "🏠 The next morning, all the families woke up with power in their homes. 'Thanks to Emma, we stayed safe and cozy!' they cheered."
+        {
+          text: "⚡ Engineer Emma worked at the power plant that brings electricity to thousands of homes. One night, her computers started beeping loudly!",
+          visuals: [
+            { icon: Zap, color: "text-yellow-500", animation: "lightning-flash", particles: "electric" },
+            { icon: Radio, color: "text-red-500", animation: "animate-pulse" },
+            { icon: Sparkles, color: "text-yellow-400", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "'Space weather is causing extra electricity in our power lines!' Emma explained to her team. 'We need to be extra careful tonight.'",
+          visuals: [
+            { icon: Zap, color: "text-orange-500", animation: "lightning-flash", particles: "error" },
+            { icon: Zap, color: "text-red-500", animation: "lightning-flash" },
+            { icon: Radio, color: "text-yellow-400", animation: "animate-ping" }
+          ]
+        },
+        {
+          text: "🔧 Emma and her team worked like superheroes, adjusting the power systems to keep everyone's lights on during the space storm.",
+          visuals: [
+            { icon: Zap, color: "text-blue-500", animation: "hologram", particles: "light" },
+            { icon: Shield, color: "text-green-400", animation: "movie-zoom" },
+            { icon: Sparkles, color: "text-yellow-400", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "🏠 The next morning, all the families woke up with power in their homes. 'Thanks to Emma, we stayed safe and cozy!' they cheered.",
+          visuals: [
+            { icon: Sun, color: "text-yellow-400", animation: "cosmic-spin", particles: "light" },
+            { icon: Star, color: "text-green-400", animation: "star-twinkle" },
+            { icon: Sparkles, color: "text-blue-400", animation: "aurora-pulse" }
+          ]
+        }
       ],
       funFact: "Space storms can create extra electricity in power lines!"
     },
@@ -91,10 +211,37 @@ export const ChildrenStories = () => {
       icon: User,
       color: "border-pink-400/50 bg-pink-400/10",
       story: [
-        "📱 Little Luna was using her mom's phone to find the playground when something funny happened - the GPS dot kept jumping around!",
-        "'Mom, why is the map being silly?' Luna asked. Her mom smiled: 'There's a space storm happening, sweetie. It makes technology act funny!'",
-        "🧭 Luna's mom taught her how to use landmarks instead: 'See the big red house? The playground is just past it!' Luna felt like a real explorer.",
-        "🌟 That night, Luna saw her first aurora through her bedroom window. 'Space weather is like magic!' she whispered, making a wish on the dancing lights."
+        {
+          text: "📱 Little Luna was using her mom's phone to find the playground when something funny happened - the GPS dot kept jumping around!",
+          visuals: [
+            { icon: MapPin, color: "text-pink-500", animation: "animate-bounce", particles: "error" },
+            { icon: Navigation, color: "text-red-500", animation: "animate-ping" },
+            { icon: Wifi, color: "text-orange-400", animation: "lightning-flash" }
+          ]
+        },
+        {
+          text: "'Mom, why is the map being silly?' Luna asked. Her mom smiled: 'There's a space storm happening, sweetie. It makes technology act funny!'",
+          visuals: [
+            { icon: Radio, color: "text-purple-500", animation: "animate-pulse", particles: "stars" },
+            { icon: Sparkles, color: "text-pink-400", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "🧭 Luna's mom taught her how to use landmarks instead: 'See the big red house? The playground is just past it!' Luna felt like a real explorer.",
+          visuals: [
+            { icon: Compass, color: "text-blue-500", animation: "cosmic-spin", particles: "light" },
+            { icon: MapPin, color: "text-green-400", animation: "movie-zoom" },
+            { icon: Star, color: "text-yellow-400", animation: "star-twinkle" }
+          ]
+        },
+        {
+          text: "🌟 That night, Luna saw her first aurora through her bedroom window. 'Space weather is like magic!' she whispered, making a wish on the dancing lights.",
+          visuals: [
+            { icon: Moon, color: "text-blue-300", animation: "aurora-pulse", particles: "aurora" },
+            { icon: Star, color: "text-purple-400", animation: "star-twinkle" },
+            { icon: Sparkles, color: "text-pink-400", animation: "star-twinkle" }
+          ]
+        }
       ],
       funFact: "Kids can learn to navigate using landmarks when GPS gets confused!"
     }
@@ -241,18 +388,55 @@ export const ChildrenStories = () => {
           </Badge>
         </div>
 
-        {/* Story Content */}
+        {/* Story Content with Animated Visuals */}
         <div className={cn(
-          "bg-background/40 backdrop-blur-sm rounded-lg p-8 mb-6 min-h-[220px] flex items-center relative overflow-hidden",
+          "bg-background/40 backdrop-blur-sm rounded-lg p-8 mb-6 min-h-[320px] flex flex-col items-center justify-center relative overflow-hidden",
           "border border-primary/20 shadow-inner"
         )}>
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+          
+          {/* Animated Visual Icons */}
+          <div className={cn(
+            "flex gap-6 mb-6 relative z-10 transition-all duration-700",
+            isTransitioning ? "opacity-0 scale-50" : "opacity-100 scale-100 cinematic-fade"
+          )}>
+            {currentStoryData.story[currentPage].visuals.map((visual, idx) => {
+              const VisualIcon = visual.icon;
+              return (
+                <div 
+                  key={idx} 
+                  className="relative group"
+                  style={{ animationDelay: `${idx * 200}ms` }}
+                >
+                  <div className={cn(
+                    "w-20 h-20 rounded-full flex items-center justify-center",
+                    "bg-background/50 backdrop-blur-md border-2 border-primary/30",
+                    "transition-all duration-500 group-hover:scale-125",
+                    visual.animation
+                  )}>
+                    <div className={cn(
+                      "absolute inset-0 rounded-full blur-xl opacity-50",
+                      visual.particles === "aurora" && "bg-gradient-to-r from-purple-500/50 to-green-500/50 aurora-pulse",
+                      visual.particles === "stars" && "bg-yellow-500/30 star-twinkle",
+                      visual.particles === "error" && "bg-red-500/40 lightning-flash",
+                      visual.particles === "light" && "bg-blue-500/40 aurora-pulse",
+                      visual.particles === "electric" && "bg-yellow-500/50 lightning-flash",
+                      visual.particles === "clouds" && "bg-gray-400/20"
+                    )} />
+                    <VisualIcon className={cn("w-10 h-10 relative z-10", visual.color)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Story Text */}
           <div className={cn(
             "w-full relative z-10 transition-all duration-500",
             isTransitioning ? "opacity-0 scale-95 blur-sm" : "opacity-100 scale-100 blur-0 cinematic-fade"
           )}>
             <p className="text-lg md:text-xl text-foreground leading-relaxed text-center font-medium">
-              {currentStoryData.story[currentPage]}
+              {currentStoryData.story[currentPage].text}
             </p>
           </div>
         </div>
