@@ -388,57 +388,143 @@ export const ChildrenStories = () => {
           </Badge>
         </div>
 
-        {/* Story Content with Animated Visuals */}
+        {/* Cinematic Story Scene */}
         <div className={cn(
-          "bg-background/40 backdrop-blur-sm rounded-lg p-8 mb-6 min-h-[320px] flex flex-col items-center justify-center relative overflow-hidden",
-          "border border-primary/20 shadow-inner"
+          "relative rounded-lg p-8 mb-6 min-h-[400px] flex flex-col items-center justify-center overflow-hidden",
+          "border border-primary/30 shadow-2xl"
         )}>
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-          
-          {/* Animated Visual Icons */}
+          {/* Dynamic Background based on story context */}
           <div className={cn(
-            "flex gap-6 mb-6 relative z-10 transition-all duration-700",
-            isTransitioning ? "opacity-0 scale-50" : "opacity-100 scale-100 cinematic-fade"
+            "absolute inset-0 transition-all duration-1000",
+            isTransitioning ? "opacity-0 scale-110" : "opacity-100 scale-100"
           )}>
-            {currentStoryData.story[currentPage].visuals.map((visual, idx) => {
-              const VisualIcon = visual.icon;
-              return (
-                <div 
-                  key={idx} 
-                  className="relative group"
-                  style={{ animationDelay: `${idx * 200}ms` }}
-                >
-                  <div className={cn(
-                    "w-20 h-20 rounded-full flex items-center justify-center",
-                    "bg-background/50 backdrop-blur-md border-2 border-primary/30",
-                    "transition-all duration-500 group-hover:scale-125",
-                    visual.animation
-                  )}>
+            <div className={cn(
+              "absolute inset-0",
+              currentPage === 0 && "bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-green-900/40",
+              currentPage === 1 && "bg-gradient-to-br from-red-900/40 via-orange-900/40 to-yellow-900/40",
+              currentPage === 2 && "bg-gradient-to-br from-green-900/40 via-blue-900/40 to-teal-900/40",
+              currentPage === 3 && "bg-gradient-to-br from-purple-900/40 via-pink-900/40 to-blue-900/40"
+            )}>
+              <div className="absolute inset-0 backdrop-blur-3xl" />
+            </div>
+            
+            {/* Animated particles matching scene mood */}
+            {Array.from({ length: 20 }).map((_, i) => (
+              <div
+                key={i}
+                className={cn(
+                  "absolute rounded-full",
+                  currentStoryData.story[currentPage].visuals[0]?.particles === "aurora" && "bg-gradient-to-r from-purple-500/30 to-green-500/30",
+                  currentStoryData.story[currentPage].visuals[0]?.particles === "stars" && "bg-yellow-400/40",
+                  currentStoryData.story[currentPage].visuals[0]?.particles === "error" && "bg-red-500/30",
+                  currentStoryData.story[currentPage].visuals[0]?.particles === "light" && "bg-blue-400/30",
+                  currentStoryData.story[currentPage].visuals[0]?.particles === "electric" && "bg-yellow-500/40",
+                  currentStoryData.story[currentPage].visuals[0]?.particles === "clouds" && "bg-gray-300/20"
+                )}
+                style={{
+                  width: `${Math.random() * 8 + 4}px`,
+                  height: `${Math.random() * 8 + 4}px`,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animation: `particle-float ${5 + Math.random() * 5}s ease-in-out infinite`,
+                  animationDelay: `${Math.random() * 2}s`
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Cinematic Icon Scene */}
+          <div className={cn(
+            "relative z-10 mb-8 transition-all duration-1000 perspective-1000",
+            isTransitioning ? "opacity-0 translate-y-20 scale-75" : "opacity-100 translate-y-0 scale-100"
+          )}>
+            <div className="flex gap-8 items-center justify-center relative">
+              {currentStoryData.story[currentPage].visuals.map((visual, idx) => {
+                const VisualIcon = visual.icon;
+                const isCenter = idx === 1;
+                return (
+                  <div 
+                    key={idx}
+                    className={cn(
+                      "relative transition-all duration-1000 ease-out",
+                      isCenter ? "scale-125 z-20" : "scale-100 z-10"
+                    )}
+                    style={{
+                      animationDelay: `${idx * 300}ms`,
+                      transform: isTransitioning 
+                        ? `translateX(${(idx - 1) * 200}px) translateY(100px) scale(0)` 
+                        : `translateX(0) translateY(0) scale(1)`
+                    }}
+                  >
+                    {/* Dramatic glow effect */}
                     <div className={cn(
-                      "absolute inset-0 rounded-full blur-xl opacity-50",
-                      visual.particles === "aurora" && "bg-gradient-to-r from-purple-500/50 to-green-500/50 aurora-pulse",
-                      visual.particles === "stars" && "bg-yellow-500/30 star-twinkle",
-                      visual.particles === "error" && "bg-red-500/40 lightning-flash",
-                      visual.particles === "light" && "bg-blue-500/40 aurora-pulse",
-                      visual.particles === "electric" && "bg-yellow-500/50 lightning-flash",
-                      visual.particles === "clouds" && "bg-gray-400/20"
-                    )} />
-                    <VisualIcon className={cn("w-10 h-10 relative z-10", visual.color)} />
+                      "absolute inset-0 rounded-full blur-2xl opacity-60 transition-all duration-700",
+                      visual.particles === "aurora" && "bg-gradient-to-r from-purple-500 to-green-500 animate-pulse",
+                      visual.particles === "stars" && "bg-yellow-400 star-twinkle",
+                      visual.particles === "error" && "bg-red-500 lightning-flash",
+                      visual.particles === "light" && "bg-blue-400 aurora-pulse",
+                      visual.particles === "electric" && "bg-yellow-500 lightning-flash",
+                      visual.particles === "clouds" && "bg-gray-300/40"
+                    )} 
+                    style={{
+                      transform: isCenter ? 'scale(2)' : 'scale(1.5)',
+                      animation: isCenter ? `${visual.animation} 2s ease-in-out infinite` : visual.animation
+                    }}
+                    />
+                    
+                    {/* Icon container with movie-like entrance */}
+                    <div className={cn(
+                      "relative rounded-full flex items-center justify-center",
+                      "bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-xl",
+                      "border-2 transition-all duration-500",
+                      isCenter ? "w-32 h-32 border-primary shadow-2xl" : "w-24 h-24 border-primary/50 shadow-xl",
+                      visual.animation
+                    )}>
+                      <VisualIcon 
+                        className={cn(
+                          "relative z-10 transition-all duration-500",
+                          visual.color,
+                          isCenter ? "w-16 h-16" : "w-12 h-12"
+                        )} 
+                      />
+                    </div>
+
+                    {/* Light rays */}
+                    {isCenter && (
+                      <>
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-primary/20 to-transparent rotate-45 animate-spin" style={{ animationDuration: '3s' }} />
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-primary/20 to-transparent -rotate-45 animate-spin" style={{ animationDuration: '4s' }} />
+                      </>
+                    )}
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
-          {/* Story Text */}
+          {/* Cinematic Story Text with typewriter reveal */}
           <div className={cn(
-            "w-full relative z-10 transition-all duration-500",
-            isTransitioning ? "opacity-0 scale-95 blur-sm" : "opacity-100 scale-100 blur-0 cinematic-fade"
+            "relative z-10 max-w-3xl mx-auto transition-all duration-1000",
+            isTransitioning 
+              ? "opacity-0 translate-y-10 blur-md scale-95" 
+              : "opacity-100 translate-y-0 blur-0 scale-100 cinematic-fade"
           )}>
-            <p className="text-lg md:text-xl text-foreground leading-relaxed text-center font-medium">
-              {currentStoryData.story[currentPage].text}
-            </p>
+            <div className="relative">
+              {/* Text shadow glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 blur-xl" />
+              
+              <p className={cn(
+                "relative text-xl md:text-2xl text-foreground leading-relaxed text-center font-semibold",
+                "drop-shadow-2xl"
+              )}>
+                {currentStoryData.story[currentPage].text}
+              </p>
+            </div>
           </div>
+
+          {/* Cinematic borders */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
         </div>
 
         {/* Page Navigation */}
