@@ -55,11 +55,10 @@ export const Hero = ({ onModeChange }: { onModeChange?: (mode: string) => void }
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Discover how space storms from the Sun affect things around you! 
             Use your phone to see how cosmic weather changes your world every day.
           </p>
-          
           
           {/* Solar System Animation */}
           <div className="mb-8">
@@ -104,7 +103,7 @@ export const Hero = ({ onModeChange }: { onModeChange?: (mode: string) => void }
               onClick={handleWatchDemo}
             >
               <Play className="w-5 h-5 mr-2 group-hover:animate-spin" />
-              🎬 Quick Preview (30s)
+              🎬 Watch Cool Demo
             </Button>
           </div>
 

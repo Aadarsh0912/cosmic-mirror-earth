@@ -208,7 +208,7 @@ export default function SpaceTour() {
       >
         {/* Animated Stars Background */}
         <div className="absolute inset-0">
-          {[...Array(100)].map((_, i) => (
+          {[...Array(50)].map((_, i) => (
             <div
               key={i}
               className="absolute w-1 h-1 bg-white rounded-full star-twinkle"
@@ -216,74 +216,6 @@ export default function SpaceTour() {
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 3}s`,
-                opacity: Math.random() * 0.8 + 0.2,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Floating Cosmic Dust Particles */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={`dust-${i}`}
-              className="absolute w-2 h-2 bg-aurora-blue/30 rounded-full animate-float-particle blur-sm"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${4 + Math.random() * 4}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Meteor Showers */}
-        {currentScene > 0 && (
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {[...Array(3)].map((_, i) => (
-              <div
-                key={`meteor-${i}`}
-                className="absolute w-1 h-20 bg-gradient-to-b from-white via-aurora-blue to-transparent"
-                style={{
-                  top: `${Math.random() * 50}%`,
-                  left: `${Math.random() * 100}%`,
-                  transform: 'rotate(45deg)',
-                  animation: `meteor-trail ${3 + Math.random() * 2}s ease-in infinite`,
-                  animationDelay: `${Math.random() * 5}s`,
-                  opacity: 0.6,
-                }}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Cosmic Energy Waves */}
-        {currentScene >= 2 && (
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-0 w-full h-full opacity-20">
-              <div className="absolute top-1/4 left-0 w-full h-32 bg-gradient-to-r from-transparent via-aurora-blue to-transparent animate-cosmic-wave blur-xl"></div>
-              <div className="absolute top-1/2 left-0 w-full h-24 bg-gradient-to-r from-transparent via-solar-orange to-transparent animate-cosmic-wave blur-lg" style={{ animationDelay: '2s' }}></div>
-              <div className="absolute top-3/4 left-0 w-full h-20 bg-gradient-to-r from-transparent via-aurora-purple to-transparent animate-cosmic-wave blur-md" style={{ animationDelay: '4s' }}></div>
-            </div>
-          </div>
-        )}
-
-        {/* Pulsing Light Orbs */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={`orb-${i}`}
-              className={`absolute rounded-full blur-3xl animate-pulse-glow ${
-                i % 3 === 0 ? 'bg-aurora-blue/10' : i % 3 === 1 ? 'bg-solar-orange/10' : 'bg-aurora-purple/10'
-              }`}
-              style={{
-                width: `${150 + Math.random() * 200}px`,
-                height: `${150 + Math.random() * 200}px`,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 3}s`,
               }}
             />
           ))}
@@ -316,67 +248,19 @@ export default function SpaceTour() {
         <div className="max-w-6xl w-full">
           {/* Visual Area */}
           <div className="relative h-[60vh] mb-8">
-            {/* Holographic Frame */}
-            <div className="absolute inset-0 border-2 border-aurora-blue/30 rounded-lg backdrop-blur-sm hologram-effect"></div>
-            
-            {/* 3D Perspective Container */}
-            <div className="absolute inset-0 perspective-1000">
-              <div
-                className={`absolute inset-0 transition-all duration-700 transform-gpu ${
-                  isAnimating ? "opacity-0 scale-75 rotate-y-90" : "opacity-100 scale-100 rotate-y-0"
-                }`}
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                {scene.visual.objects.map((obj, index) => (
-                  <div
-                    key={index}
-                    className={`absolute ${obj.position} ${obj.size} ${obj.animation} transition-all duration-500 hover:scale-125 cursor-pointer`}
-                    style={{
-                      animationDelay: `${index * 0.2}s`,
-                      filter: 'drop-shadow(0 0 20px currentColor)',
-                      transformStyle: 'preserve-3d',
-                    }}
-                  >
-                    {obj.emoji}
-                    
-                    {/* Glow Ring Effect */}
-                    <div className="absolute inset-0 -z-10">
-                      <div className="absolute inset-0 bg-current opacity-20 rounded-full blur-xl animate-pulse-glow"></div>
-                    </div>
-                  </div>
-                ))}
-
-                {/* Scene-specific Extra Effects */}
-                {currentScene === 2 && (
-                  <>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-4 border-solar-orange/30 rounded-full animate-ping" style={{ animationDuration: '3s' }}></div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border-2 border-yellow-500/20 rounded-full animate-ping" style={{ animationDuration: '2s', animationDelay: '1s' }}></div>
-                  </>
-                )}
-
-                {currentScene === 4 && (
-                  <>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-2 border-aurora-blue/40 rounded-full animate-pulse-glow"></div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] border-2 border-aurora-blue/30 rounded-full animate-pulse-glow" style={{ animationDelay: '1s' }}></div>
-                  </>
-                )}
-
-                {currentScene === 6 && (
-                  <>
-                    {[...Array(8)].map((_, i) => (
-                      <div
-                        key={`signal-${i}`}
-                        className="absolute top-1/2 left-1/2 w-1 h-20 bg-gradient-to-t from-aurora-blue to-transparent"
-                        style={{
-                          transform: `translate(-50%, -50%) rotate(${i * 45}deg) translateY(-100px)`,
-                          animation: 'aurora-pulse 2s ease-in-out infinite',
-                          animationDelay: `${i * 0.2}s`,
-                        }}
-                      />
-                    ))}
-                  </>
-                )}
-              </div>
+            <div
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                isAnimating ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              {scene.visual.objects.map((obj, index) => (
+                <div
+                  key={index}
+                  className={`absolute ${obj.position} ${obj.size} ${obj.animation}`}
+                >
+                  {obj.emoji}
+                </div>
+              ))}
             </div>
           </div>
 
