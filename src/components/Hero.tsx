@@ -60,16 +60,6 @@ export const Hero = ({ onModeChange }: { onModeChange?: (mode: string) => void }
             Use your phone to see how cosmic weather changes your world every day.
           </p>
           
-          <div className="flex flex-wrap gap-4 justify-center mb-8 text-sm">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-aurora-blue/10 border border-aurora-blue/30">
-              <Sparkles className="w-4 h-4 text-aurora-blue" />
-              <span className="text-foreground">Full Interactive Tour</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-solar-orange/10 border border-solar-orange/30">
-              <Play className="w-4 h-4 text-solar-orange" />
-              <span className="text-foreground">Quick 30s Demo</span>
-            </div>
-          </div>
           
           {/* Solar System Animation */}
           <div className="mb-8">
