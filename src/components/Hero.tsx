@@ -12,17 +12,12 @@ export const Hero = ({ onModeChange }: { onModeChange?: (mode: string) => void }
   const navigate = useNavigate();
 
   const handleStartAdventure = () => {
-    // Animate button click
+    // Animate button click and navigate to tour
     const button = document.querySelector('.adventure-button');
     button?.classList.add('animate-scale-out');
     
     setTimeout(() => {
-      if (onModeChange) {
-        onModeChange('stories');
-      }
-      // Scroll to stories section
-      const storiesSection = document.getElementById('mode-selection');
-      storiesSection?.scrollIntoView({ behavior: 'smooth' });
+      navigate('/space-tour');
     }, 300);
   };
 
